@@ -1,0 +1,26 @@
+#linkname {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#pwgLinkDir{
+	float: right;
+}
+
+#fileList tr:hover  .action-piwigo.pwg-disabled{
+	display:none;
+}
+
+.action-piwigo.pwg-linked {
+	opacity:1!important;
+}
+
+.action-piwigo:not(.pwg-linked ) {
+}
+a.pwglink{
+	float: right;
+	
+}
+a.pwglink:hover{
+	text-decoration: underline;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<info>
+    <id>files_pwg</id>
+    <name>Files Link to piwigo</name>
+    <description>Créé un symplink vers piwigo</description>
+    <licence>GPL</licence>
+    <author>denis</author>
+    <version>0.0.1a</version>
+    <namespace>Files_Pwg</namespace>
+    <category>productivity</category>
+	<repository></repository>
+    <dependencies>
+        <owncloud min-version="8" />
+    </dependencies>
+	<types>
+		<filesystem/>
+	</types>
+	<ocsid></ocsid>
+</info>
