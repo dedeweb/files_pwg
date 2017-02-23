@@ -11,7 +11,7 @@
 	display:none;
 }
 
-.action-piwigo.pwg-linked {
+#fileList a.action.action-piwigo.permanent.pwg-linked {
 	opacity:1!important;
 }
 
