@@ -1,24 +1,7 @@
-# Files Mv
-Place this app in **owncloud/apps/** and rename it to **files_mv**
+# Files Pwg
+Place this app in **owncloud/apps/** and make sure directory name is files_pwg
 
-## Install from github
-Download the version from github and run the following command in the folder:
+##Usage
 
-	make appstore_package
-
-Extract the archive *build/artifacts/appstore/files_mv.tar.gz* to your owncloud app folder.
-
-## Publish to App Store
-
-First get an account for the [App Store](http://apps.owncloud.com/) then run:
-
-    make appstore
-
-**ocdev** will ask for your App Store credentials and save them to ~/.ocdevrc which is created afterwards for reuse.
-
-If the <ocsid> field in **appinfo/info.xml** is not present, a new app will be created on the appstore instead of updated. You can look up the ocsid in the app page URL, e.g.: **http://apps.owncloud.com/content/show.php/News?content=168040** would use the ocsid **168040**
-
-## Running tests
-After [Installing PHPUnit](http://phpunit.de/getting-started.html) run:
-
-    phpunit -c phpunit.xml
+I made this plugin to simplify the task of making a symlink of a picture directory in owncloud/nextcloud inside the piwigo gallery directory. After that, I just have to click "synchronize" on piwigo, and I have made a web gallerie from the selected directory of my owncloud repo.
+Of course, owncloud server and piwigo server have to be on the same computer.  
