@@ -28,7 +28,7 @@ class LinkController extends Controller {
 		parent::__construct($AppName, $request);
 		$this->storage = $UserFolder;
 		$this->l = $l;
-		$this->piwigoDir = '/var/www/piwigo/galleries/';
+		$this->piwigoDir = '/var/www/piwigo/galleries/albums/';
 	}
 	/**
 	 * lie le répertoire à piwigo. 
