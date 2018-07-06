@@ -24,3 +24,33 @@ a.pwglink{
 a.pwglink:hover{
 	text-decoration: underline;
 }
+
+.piwigoTabView input[type="text"].linkText{
+	width: 100%;
+	box-sizing: border-box;
+	padding-right: 32px;
+	text-overflow: ellipsis;
+}
+
+.piwigoTabView .icon {
+	background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-width: 16px;
+  min-height: 16px;
+}
+
+.piwigoTabView .clipboardButton {
+	position: absolute;
+	right: -7px;
+	top: -2px;
+	padding: 14px;
+}
+
+.piwigoTabView .oneline {
+    white-space: nowrap;
+    position: relative;
+}
+
+
+
