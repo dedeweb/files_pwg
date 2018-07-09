@@ -49,7 +49,7 @@
           } else {
             html += '<input id="linkname" disabled="disabled"  type="text" placeholder="dir name" value="' + this.model.attributes.piwigoLink + '"><br>';
             html += '<div id="album-wrapper"></div>';
-            html += '<br/><a class="pwglink" id="adm-link" href="https://photos.dedeweb.fr/album_src/admin.html?album=' + this.model.attributes.piwigoLink + '" target="_blank">';
+            html += '<br/><a class="pwglink" id="adm-link" href="https://photos.dedeweb.fr/album/admin.html?album=' + this.model.attributes.piwigoLink + '" target="_blank">';
             html += 'aller dans piwigo ! ';
             html += '</a>';
           }
@@ -62,7 +62,7 @@
         var _this = this;
         this._getShareToken(function(token) {
           if(token) {
-            _this.$el.find('#adm-link').attr('href', 'https://photos.dedeweb.fr/album_src/admin.html?album=' + _this.model.attributes.piwigoLink + '&token=' + token);
+            _this.$el.find('#adm-link').attr('href', 'https://photos.dedeweb.fr/album/admin.html?album=' + _this.model.attributes.piwigoLink + '&token=' + token);
             _this.$el.find('#album-wrapper').html(_this._htmlFromToken(token, _this.model.attributes.id));
           }
         });
