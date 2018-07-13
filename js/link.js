@@ -32,10 +32,16 @@
       }
       var fileActions = fileList.fileActions;
       var oldCreateRow = fileList._createRow;
+      var linkList = [];
       var linkListPromise = $.ajax({
         type: 'GET',
         url: OC.generateUrl('/apps/files_pwg/listlinks'),
         cache: false
+      }).then(function (data) {
+         if (data.status == 'success') {
+            //that.linkList = data.links;
+            linkList = data.links;
+         }
       });
 
       //Not very clean :-(
@@ -49,15 +55,14 @@
       fileList.$el.on('fileActionsReady', function(ev) {
         var $files = ev.$files;
 
-        linkListPromise.then(function(data) {
-          if (data.status == 'success') {
+        linkListPromise.then(function() {
+          if (linkList) {
             //that.linkList = data.links;
-            var links = data.links;
             _.each($files, function(file) {
               var $tr = $(file);
               if (!$tr.data('pwg-processed')) {
                 var fileName = $tr.data('file');
-                _.each(links, function(curLink) {
+                _.each(linkList, function(curLink) {
                   if (curLink.link == fileName) {
                     $tr.attr('data-pwg-link', curLink.file);
                     $tr.find('.action-piwigo').addClass('pwg-linked');
@@ -96,6 +101,8 @@
       var piwigoTab = new OCA.Piwigo.PiwigoTabView('piwigoTabView', {
         order: -20
       });
+      piwigoTab.getLinkList =  function () { return linkList;};
+      
 
       fileList.registerTabView(piwigoTab);
     }

@@ -19,7 +19,7 @@
     {
       id: 'piwigoTabView',
       className: 'tab piwigoTabView',
-
+      getLinkList: function () {},
       template: function(params) {
         if (!this._template) {
           this._template = Handlebars.compile(TEMPLATE);
@@ -143,6 +143,10 @@
               //afficher message OK
               OC.Notification.showTemporary("lien créé avec succès");
               that.model.attributes.piwigoLink = linkname;
+              that.getLinkList().push({
+                file: linkname,
+                link: filename
+              })
               that.render();
             }
             console.log(data)
@@ -173,6 +177,7 @@
                   //afficher message OK
                   OC.Notification.showTemporary("lien supprimé avec succès");
                   that.model.attributes.piwigoLink = null;
+                  that.getLinkList().splice(that.getLinkList().findIndex(x => x.file === linkname),1);
                   that.render();
                 }
                 console.log(data)
