@@ -66,6 +66,14 @@ class LinkController extends Controller {
 		return $result;
 
 	}
+  
+  public function deleteLink($linkname) {
+    if(is_link($this->piwigoDir.$linkname)) {
+      unlink($this->piwigoDir.$linkname);
+      return array('status'=>'success');
+    }
+    return array('status'=>'error');
+  }
 
 	public function listLinks()
 	{

@@ -24,6 +24,7 @@
 return [
     'routes' => [
 		['name' => 'link#index', 'url' => '/link', 'verb' => 'POST'],
-		['name' => 'link#listLinks', 'url' => '/listlinks', 'verb' => 'GET']
+		['name' => 'link#listLinks', 'url' => '/listlinks', 'verb' => 'GET'],
+    ['name' => 'link#deleteLink', 'url' => '/link', 'verb' => 'DELETE']
     ]
 ];

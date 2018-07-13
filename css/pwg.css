@@ -52,5 +52,8 @@ a.pwglink:hover{
     position: relative;
 }
 
+.piwigoTabView .delete {
+  display: inline-block;
+}
 
 

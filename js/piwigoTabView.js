@@ -26,7 +26,7 @@
         }
         return this._template(params);
       },
-
+      fileList: null,
       getLabel: function() {
         return t('files_piwigo', 'Piwigo');
       },
@@ -46,28 +46,37 @@
             html += '<input type="submit" id="pwgLinkDir" value="link" />';
             html += '<strong id="pwgWarning"></strong></form>';
             html += '</div>';
+            $('tr[data-id='+this.model.id+']').removeAttr('data-pwg-link');
+            $('tr[data-id='+this.model.id+']').find('.action-piwigo').removeClass('pwg-linked');
           } else {
             html += '<input id="linkname" disabled="disabled"  type="text" placeholder="dir name" value="' + this.model.attributes.piwigoLink + '"><br>';
             html += '<div id="album-wrapper"></div>';
             html += '<br/><a class="pwglink" id="adm-link" href="https://photos.dedeweb.fr/album/admin.html?album=' + this.model.attributes.piwigoLink + '" target="_blank">';
             html += 'aller dans piwigo ! ';
             html += '</a>';
+            html += '<a href="#" class="action delete icon icon-delete has-tooltip" title="" data-original-title="delete link"></a>';
+            $('tr[data-id='+this.model.id+']').attr('data-pwg-link',this.model.attributes.piwigoLink);
+            $('tr[data-id='+this.model.id+']').find('.action-piwigo').addClass('pwg-linked');
           }
         }
 
         this.$el.html(html);
 
         this.$el.find('#pwgForm').on('submit', this._submitForm.bind(this));
-        
+        this.$el.find('.delete').click(this._deleteLink.bind(this));
+
         var _this = this;
         this._getShareToken(function(token) {
-          if(token) {
+          if (token) {
             _this.$el.find('#adm-link').attr('href', 'https://photos.dedeweb.fr/album/admin.html?album=' + _this.model.attributes.piwigoLink + '&token=' + token);
             _this.$el.find('#album-wrapper').html(_this._htmlFromToken(token, _this.model.attributes.id));
           }
         });
-        
+
         var clipboard = new Clipboard('.clipboardButton');
+        
+        
+        
       },
       canDisplay: function(fileInfo) {
         return fileInfo != null && fileInfo.isDirectory() && fileInfo.attributes.path == '/photos';
@@ -135,7 +144,6 @@
               OC.Notification.showTemporary("lien créé avec succès");
               that.model.attributes.piwigoLink = linkname;
               that.render();
-
             }
             console.log(data)
           }
@@ -143,6 +151,36 @@
 
 
         return false;
+      },
+      _deleteLink: function() {
+        var that = this;
+        var linkname = this.$el.find('#linkname').val();
+        OC.dialogs.confirm('Etes vous sur de vouloir supprimer le lien?', 'Suppression du lien', function(confirm) {
+          if (confirm) {
+            $.ajax({
+              type: 'DELETE',
+              url: OC.generateUrl('/apps/files_pwg/link'),
+              cache: false,
+              data: {
+                linkname: linkname
+              },
+              success: function(data) {
+                // show error messages when caught some
+                if (data.status == "error") {
+                  OC.dialogs.alert(data.message, "erreur lors de la suppresion")
+
+                } else {
+                  //afficher message OK
+                  OC.Notification.showTemporary("lien supprimé avec succès");
+                  that.model.attributes.piwigoLink = null;
+                  that.render();
+                }
+                console.log(data)
+              }
+            });
+
+          }
+        }, true);
       },
       _getShareToken: function(token_cb) {
         if (this.model) {
